@@ -9,6 +9,25 @@
 # 目录结构
 
 
+* sql              //sqk文件</br>
+* src
+  * main
+    * java
+      * com.ke
+        * conroller           //控制器</br>
+        * exception           //全局异常处理</br>
+        * mapper              //mybatis mapper接口和XML文件</br>
+        * pojo
+     - resources
+     - webapp
+- README.md
+- pom.xml
+
+|--sql   </br>
+|--src   </br>
+|  |--main   
+|
+
 # 模块完成进度
 
 | 模块 | 进度 |描述 |
