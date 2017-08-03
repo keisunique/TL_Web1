@@ -6,3 +6,19 @@
 
 采用框架：Spring+SpringMVC+MyBatis+Shiro
 
+#目录结构
+
+├── Readme.md                   // help
+├── sql                         // 数据库文件
+├── src                      // 配置
+│   ├── main
+│   
+│  
+│   
+│   
+│  
+
+
+
+
+
