@@ -6,17 +6,16 @@
 
 采用框架：Spring+SpringMVC+MyBatis+Shiro
 
-#目录结构
+# 目录结构
 
-├── Readme.md                   // help
-├── sql                         // 数据库文件
-├── src                      // 配置
-│   ├── main
-│   
-│  
-│   
-│   
-│  
+
+#模块完成进度
+
+| Tables | Are | Cool |
+| ------------- |:-------------:| -----:|
+| col 3 is | right-aligned | $1600 |
+| col 2 is | centered | $12 |
+| zebra stripes | are neat | $1 |
 
 
 
