@@ -1,0 +1,41 @@
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+/*背景设置*/
+.backgroundset{
+
+    /*background: url(../picture/bg1.jpg) repeat fixed center;*/
+    background: url(../picture/bg3.jpg) repeat fixed center;
+}
+
+#title{
+    padding-top: 10%;
+    text-align:center;
+    color: white;
+}
+
+#loginForm{
+    text-align:center;
+    padding-right: 30%;
+    padding-left: 30%;
+    padding-top: 10%;
+}
+
+#password{
+    padding-top: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
