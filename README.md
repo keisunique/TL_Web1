@@ -11,11 +11,11 @@
 
 # 模块完成进度
 
-| 模块 | 进度 |
-| ------------- | -----:|
-| col 3 is | right-aligned |
-| col 2 is | centered |
-| zebra stripes | are neat |
+| 模块 | 进度 |描述 |
+| ------------- |:-------------:|--------|
+| 权限管理 | right-aligned |zc|
+| col 2 is | centered |zxczxc|
+| zebra stripes | are neat |zxc|
 
 
 
