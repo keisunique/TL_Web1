@@ -11,11 +11,11 @@
 
 * sql              //sqk文件</br>
 * src
-  * main
+    * main
     * java
       * com.ke
-        * conroller           //控制器</br>
-        * exception           //全局异常处理</br>
+        * controller           //控制器
+        * exception           //全局异常处理</br>
         * mapper              //mybatis mapper接口和XML文件</br>
         * pojo
      - resources
