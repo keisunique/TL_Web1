@@ -7,7 +7,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>用户管理 - Learning Together</title>
+<title>会员管理 - Learning Together</title>
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/bootstrap.min.css">
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/style.css">
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/font-awesome.min.css">
@@ -81,9 +81,9 @@
         <li><a href="comment.html">资源管理</a></li>
         <li><a class="dropdown-toggle" id="userMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户管理</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
+            <li><a>管理员</a></li>
             <li><a href="${pageContext.request.contextPath}/bs/managemoderatorpage">版主</a></li>
-            <li><a>会员</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/manageuserpage">会员</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="loginlog.html">登录日志</a></li>
           </ul>
@@ -118,9 +118,9 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
     <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
-          <li><a data-toggle="modal" data-target="#addUser">增加用户</a></li>
+          <li><a data-toggle="modal" data-target="#addUser">增加管理员账户</a></li>
         </ol>
-        <h1 class="page-header">管理 <span class="badge">2</span></h1>
+        <h1 class="page-header">管理员<span class="badge">${count}</span></h1>
         <div class="table-responsive">
           <table class="table table-striped table-hover">
             <thead>
@@ -134,19 +134,19 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${users}">
+            <c:forEach var="admin" items="${admins}">
               <tr>
-                <td>${user.username}</td>
-                <td>${user.password}</td>
+                <td>${admin.username}</td>
+                <td>${admin.password}</td>
                 <td>
                   <fmt:formatDate
                         type="date"
-                        value="${user.registrationTime}"
+                        value="${admin.registrationTime}"
                         dateStyle="default"
                   />
                 </td>
-                <td>${user.loginTimes}</td>
-                <td>${user.locked==0?"正常":"禁用"}</td>
+                <td>${admin.loginTimes}</td>
+                <td>${admin.locked==0?"正常":"禁用"}</td>
                 <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
               </tr>
             </c:forEach>
@@ -159,10 +159,10 @@
 
 
 </section>
-<!--增加用户模态框-->
+<!--增加管理员模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="/User/add" method="post" autocomplete="off" draggable="false">
+    <form action="${pageContext.request.contextPath}/bs/adduser" method="post" autocomplete="off" draggable="false">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -176,6 +176,7 @@
             <tbody>
               <tr>
                 <td wdith="20%">用户名:</td>
+                <input type="hidden" name="roleId" value="1">
                 <td width="80%"><input type="text" value="" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
               </tr>
               <tr>

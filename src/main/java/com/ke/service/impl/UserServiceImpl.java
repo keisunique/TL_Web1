@@ -95,4 +95,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    public int insertUser(User user) {
+        return userMapper.insert(user);
+    }
 }

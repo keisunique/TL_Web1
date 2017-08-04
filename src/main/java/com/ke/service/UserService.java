@@ -27,5 +27,7 @@ public interface UserService {
 
     List<User> selectAllModerator();
 
+    int insertUser(User user);
+
 
 }

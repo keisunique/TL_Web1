@@ -7,7 +7,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>用户管理 - Learning Together</title>
+<title>版主管理 - Learning Together</title>
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/bootstrap.min.css">
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/style.css">
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/font-awesome.min.css">
@@ -82,8 +82,8 @@
         <li><a class="dropdown-toggle" id="userMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户管理</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
             <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
-            <li><a href="${pageContext.request.contextPath}/bs/managemoderatorpage">版主</a></li>
-            <li><a>会员</a></li>
+            <li><a>版主</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/manageuserpage">会员</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="loginlog.html">登录日志</a></li>
           </ul>
@@ -118,7 +118,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
     <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
-          <li><a data-toggle="modal" data-target="#addUser">增加用户</a></li>
+          <li><a data-toggle="modal" data-target="#addUser">增加管理员账户</a></li>
         </ol>
         <h1 class="page-header">管理 <span class="badge">2</span></h1>
         <div class="table-responsive">
@@ -134,19 +134,19 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${users}">
+            <c:forEach var="moderator" items="${moderators}">
               <tr>
-                <td>${user.username}</td>
-                <td>${user.password}</td>
+                <td>${moderator.username}</td>
+                <td>${moderator.password}</td>
                 <td>
                   <fmt:formatDate
                         type="date"
-                        value="${user.registrationTime}"
+                        value="${moderator.registrationTime}"
                         dateStyle="default"
                   />
                 </td>
-                <td>${user.loginTimes}</td>
-                <td>${user.locked==0?"正常":"禁用"}</td>
+                <td>${moderator.loginTimes}</td>
+                <td>${moderator.locked==0?"正常":"禁用"}</td>
                 <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
               </tr>
             </c:forEach>
