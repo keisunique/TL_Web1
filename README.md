@@ -23,10 +23,6 @@
 - README.md
 - pom.xml
 
-|--sql   </br>
-|--src   </br>
-|  |--main   
-|
 
 # 模块完成进度
 
@@ -41,5 +37,8 @@
 
 
 
+后台登陆地址http://localhost:8080/bs/login
 
+账号：ke
+密码：123
 
