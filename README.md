@@ -17,9 +17,21 @@
         * controller           //控制器
         * exception           //全局异常处理</br>
         * mapper              //mybatis mapper接口和XML文件</br>
-        * pojo
-     - resources
+        * pojo              
+        * service               //业务逻辑
+            * impl           //接口实现类                  
+        * shiro                  //shiro权限控制
+    
+     - resources                 //配置文件
+        
      - webapp
+        - statics
+        - WEB-INF
+            - views
+                - bs
+                    - admin 
+            - web.xml
+        - home.jsp
 - README.md
 - pom.xml
 
