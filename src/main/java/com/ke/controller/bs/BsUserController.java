@@ -2,6 +2,7 @@ package com.ke.controller.bs;
 
 import com.ke.pojo.User;
 import com.ke.service.UserService;
+import com.ke.shiro.PasswordHelper;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +28,9 @@ public class BsUserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordHelper ph;
 
     @RequestMapping(value = "/manageuserpage",method = RequestMethod.GET)
     public String manageUser(Model model){
@@ -57,34 +64,52 @@ public class BsUserController {
     }
 
 
-    @RequestMapping(value = "/adduser",method = RequestMethod.POST)
-    public String addUser(User user,Model model){
+    @RequestMapping(value = "/user/{action}")
+    public ModelAndView addUser(@PathVariable("action") String action, User user,
+                                @RequestParam(defaultValue = "null") String lockname ){
 
-        System.out.println("添加用户"+user.getRoleId()+user.getUsername()+user.getPassword());
+        ModelAndView mv = new ModelAndView();
 
-        user.setRegistrationTime(new Date());
-        user.setLocked(0);
-        user.setLoginTimes(0);
-        user.setSalt("123");
+        if(action.equals("insert")){
+            user.setRegistrationTime(new Date());
+            user.setLocked(0);
+            user.setLoginTimes(0);
+            user.setSalt("123");
+            userService.insertUser(ph.encryptPassword(user));
 
-        userService.insertUser(user);
+        }else if(action.equals("update")){
+            if(ph.confirmPassword(user)){
+                //如果账号与密码匹配则修改账号密码
+
+            }else{
+                //不匹配返回错误信息
+            }
+
+        }else if(action.equals("delete")){
+
+
+        }else if(action.equals("lock")){
+
+
+        }
 
         int i = user.getRoleId();
         switch (i){
             case 1 :
-                model.addAttribute("users",userService.selectAllAdmin());
-                return "bs/admin/manage-admin";
-
+                mv.addObject("users",userService.selectAllAdmin());
+                mv.setViewName("redirect:/bs/managemoderatorpage");
             case 2 :
-                model.addAttribute("users",userService.selectAllModerator());
-                return "redirect:/bs/managemoderatorpage";
+                mv.addObject("users",userService.selectAllAdmin());
+                mv.setViewName("redirect:/bs/managemoderatorpage");
 
             case 3 :
-                model.addAttribute("users",userService.selectAllUser());
-                return "redirect:/bs/manageuserpage";
+                mv.addObject("users",userService.selectAllAdmin());
+                mv.setViewName("redirect:/bs/managemoderatorpage");
 
-            default:return "bs/admin/index";
+            default:return mv;
         }
 
     }
+
+
 }

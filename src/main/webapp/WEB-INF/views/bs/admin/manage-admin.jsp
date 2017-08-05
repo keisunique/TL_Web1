@@ -147,7 +147,10 @@
                 </td>
                 <td>${admin.loginTimes}</td>
                 <td>${admin.locked==0?"正常":"禁用"}</td>
-                <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
+                <td>
+                  <a data-toggle="modal" data-target="#update">修改</a>
+                  <a rel="1" name="delete">删除</a>
+                  <a href="${pageContext.request.contextPath}/bs/user/lock?lockuser=${admin.username}">${admin.locked==0?"禁用":"启用"}</a></td>
               </tr>
             </c:forEach>
 
@@ -162,7 +165,7 @@
 <!--增加管理员模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="${pageContext.request.contextPath}/bs/adduser" method="post" autocomplete="off" draggable="false">
+    <form action="${pageContext.request.contextPath}/bs/user/insert" method="post" autocomplete="off" draggable="false">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -203,9 +206,9 @@
 </div>
 
 <!--用户信息模态框-->
-<div class="modal fade" id="seeUser" tabindex="-1" role="dialog" aria-labelledby="seeUserModalLabel">
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="seeUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="/User/update" method="post" autocomplete="off" draggable="false">
+    <form action="${pageContext.request.contextPath}/bs/user/update" method="post" autocomplete="off" draggable="false">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -218,20 +221,12 @@
             </thead>
             <tbody>
               <tr>
-                <td wdith="20%">姓名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="truename" name="truename" maxlength="10" autocomplete="off" /></td>
-              </tr>
-              <tr>
                 <td wdith="20%">用户名:</td>
                 <td width="80%"><input type="text" value="" class="form-control" id="username" name="username" maxlength="10" autocomplete="off" /></td>
               </tr>
               <tr>
-                <td wdith="20%">电话:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="usertel" name="usertel" maxlength="13" autocomplete="off" /></td>
-              </tr>
-              <tr>
                 <td wdith="20%">旧密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="old_password" maxlength="18" autocomplete="off" /></td>
+                <td width="80%"><input type="password" class="form-control" name="oldPassword" maxlength="18" autocomplete="off" /></td>
               </tr>
               <tr>
                 <td wdith="20%">新密码:</td>
@@ -239,7 +234,7 @@
               </tr>
               <tr>
                 <td wdith="20%">确认密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
+                <td width="80%"><input type="password" class="form-control" name="newPassword" maxlength="18" autocomplete="off" /></td>
               </tr>
             </tbody>
             <tfoot>
@@ -358,18 +353,7 @@
     </div>
   </div>
 </div>
-<!--微信二维码模态框-->
-<div class="modal fade user-select" id="WeChat" tabindex="-1" role="dialog" aria-labelledby="WeChatModalLabel">
-  <div class="modal-dialog" role="document" style="margin-top:120px;max-width:280px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="WeChatModalLabel" style="cursor:default;">微信扫一扫</h4>
-      </div>
-      <div class="modal-body" style="text-align:center"> <img src="${pageContext.request.contextPath}/statics/bspage/images/weixin.jpg" alt="" style="cursor:pointer"/> </div>
-    </div>
-  </div>
-</div>
+
 <!--提示模态框-->
 <div class="modal fade user-select" id="areDeveloping" tabindex="-1" role="dialog" aria-labelledby="areDevelopingModalLabel">
   <div class="modal-dialog" role="document">
@@ -387,25 +371,22 @@
     </div>
   </div>
 </div>
-<!--右键菜单列表-->
-<div id="rightClickMenu">
-  <ul class="list-group rightClickMenuList">
-    <li class="list-group-item disabled">欢迎访问异清轩博客</li>
-    <li class="list-group-item"><span>IP：</span>172.16.10.129</li>
-    <li class="list-group-item"><span>地址：</span>河南省郑州市</li>
-    <li class="list-group-item"><span>系统：</span>Windows10 </li>
-    <li class="list-group-item"><span>浏览器：</span>Chrome47</li>
-  </ul>
-</div>
+
 <script src="${pageContext.request.contextPath}/statics/bspage/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/bspage/js/admin-scripts.js"></script>
+
+<script>
+
+</script>
+
+
 <script>
 $(function () {
     $("#main table tbody tr td a").click(function () {
         var name = $(this);
-        var id = name.attr("rel"); //对应id   
-        if (name.attr("name") === "see") {
-            $.ajax({
+        var id = name.attr("rel"); //对应id
+        if (name.attr("name") === "update") {
+          /* $.ajax({
                 type: "POST",
                 url: "/User/see",
                 data: "id=" + id,
@@ -418,7 +399,7 @@ $(function () {
 					$('#userid').val(data.userid);
                     $('#seeUser').modal('show');
                 }
-            });
+            });*/
         } else if (name.attr("name") === "delete") {
             if (window.confirm("此操作不可逆，是否确认？")) {
                 $.ajax({
