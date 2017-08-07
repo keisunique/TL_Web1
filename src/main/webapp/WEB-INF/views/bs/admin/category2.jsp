@@ -9,7 +9,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>一级版块 - Learn together</title>
+  <title>二级版块 - Learn together</title>
 
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/bootstrap.min.css">
   <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/style.css">
@@ -72,8 +72,8 @@
         <ul class="nav nav-sidebar">
           <li><a class="dropdown-toggle" id="userMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">版块管理</a>
             <ul class="dropdown-menu" aria-labelledby="userMenu">
-              <li><a>一级版块</a></li>
-              <li><a href="${pageContext.request.contextPath}/bs/category/2">二级版块</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/category/1">一级版块</a></li>
+              <li><a>二级版块</a></li>
             </ul>
           </li>
           <li><a href="comment.html">资源管理</a></li>
@@ -118,7 +118,7 @@
         <form action="${pageContext.request.contextPath}/bs/delItems" method="post" name="items">
           <h1 class="page-header">操作</h1>
           <ol class="breadcrumb">
-            <li><a data-toggle="modal" data-target="#addSection">增加一级版块</a></li>
+            <li><a data-toggle="modal" data-target="#addSection">增加二级版块</a></li>
           </ol>
           <h1 class="page-header">管理 <span class="badge">${count}</span></h1>
           <div class="table-responsive">
@@ -128,18 +128,23 @@
                   <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">选择</span></th>
                   <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">名称</span></th>
                   <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">描述</span></th>
+                  <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">父版块</span></th>
                   <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
                 </tr>
               </thead>
               <tbody>
-              <c:forEach  var="section" items="${sections}">
-                <tr id="${section.id}">
-                  <td><input type="checkbox" class="input-control" name="checkbox[]" value="${section.id}" /></td>
-                  <td class="article-title">${section.sectionName}</td>
-                  <td>${section.sectionDescription}</td>
+              <c:forEach  var="subsection" items="${subsections}">
+                <tr id="${subsection.id}">
                   <td>
-                    <a onclick="updateSec(${section.id})">修改 </a>
-                    <a rel="${section.id}">删除</a></td>
+                    <input type="checkbox" class="input-control" name="checkbox[]" value="${subsection.id}" />
+                  </td>
+                  <td class="article-title">${subsection.sectionName}</td>
+                  <td>${subsection.sectionDescription}</td>
+                  <td>${pSecNameMap.get(subsection.parentSection)}</td>
+                  <td>
+                    <a onclick="updateSec(${subsection.id})">修改 </a>
+                    <a rel="${subsection.id}">删除</a>
+                  </td>
                 </tr>
               </c:forEach>
               </tbody>
@@ -268,14 +273,14 @@
   </div>
 </div>
 
-<!--添加一级版块模态框-->
+<!--添加二级版块模态框-->
 <div class="modal fade" id="addSection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <form action="${pageContext.request.contextPath}/bs/category/add/1" method="post">
+    <form action="${pageContext.request.contextPath}/bs/category2/add/1" method="post">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" >添加一级版块</h4>
+          <h4 class="modal-title" >添加二级版块</h4>
         </div>
         <div class="modal-body">
           <table class="table" style="margin-bottom:0px;">
@@ -290,6 +295,16 @@
             <tr>
               <td wdith="20%">版块描述:</td>
               <td width="80%"><input type="text"  class="form-control" name="sectionDescription" maxlength="10" autocomplete="off" /></td>
+            </tr>
+            <tr>
+              <td wdith="20%">父版块:</td>
+              <td width="80%">
+                <select id="category-fname" class="form-control" name="parentSection">
+                  <c:forEach var="section" items="${sections}">
+                    <option value="${section.id}">${section.sectionName}</option>
+                  </c:forEach>
+                </select>
+              </td>
             </tr>
             </tbody>
             <tfoot>
@@ -378,22 +393,13 @@
 <script src="${pageContext.request.contextPath}/statics/bspage/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/bspage/js/admin-scripts.js"></script>
 
-<!--修改版块信息-->
-<script>
-    function editInfo(obj) {
-        var tds= $(obj).parent().find('td');
-        alert(tds.eq(2).text());
-        $('#updateSectionName').val(tds.eq(0).id);
-        $('#updateSectionDescription').val(tds.eq(1).text());
-        $('#updateSection').modal('show');
-    }
-</script>
+
 
 <!--更新版块信息-->
 <script>
   function updateSec(id){
       $("#updateSectionId").val(id);
-      $("#updateForm").attr("action", "/bs/category/update/"+id);
+      $("#updateForm").attr("action", "/bs/category2/update/"+id);
       $("#updateSection").modal("show");
   }
 </script>
@@ -410,7 +416,7 @@ $(function(){
 			{
 				$.ajax({
 					type: "POST",
-					url: "/bs/category/delete/"+id,
+					url: "/bs/category2/delete/"+id,
 					data: "id=" + id,
 					cache: false, //不缓存此页面
 					success: function (data) {

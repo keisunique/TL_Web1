@@ -39,4 +39,6 @@ public interface SubSectionMapper {
     int updateByPrimaryKeyWithBLOBs(SubSection record);
 
     int updateByPrimaryKey(SubSection record);
+
+    List<SubSection> selectAllSubSection();
 }

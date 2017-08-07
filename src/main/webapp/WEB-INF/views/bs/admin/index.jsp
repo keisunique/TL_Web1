@@ -66,13 +66,13 @@
     <!--侧边菜单-->
     <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="index.jsp">信息总览</a></li>
+        <li class="active"><a>信息总览</a></li>
       </ul>
       <ul class="nav nav-sidebar">
         <li><a class="dropdown-toggle" id="userMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">版块管理</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a href="${pageContext.request.contextPath}/bs/category">一级版块</a></li>
-            <li><a href="category">二级版块</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/category/1">一级版块</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/category/2">二级版块</a></li>
           </ul>
         </li>
         <li><a href="comment.html">资源管理</a></li>

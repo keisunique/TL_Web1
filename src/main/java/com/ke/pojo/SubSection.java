@@ -3,11 +3,11 @@ package com.ke.pojo;
 public class SubSection {
     private Integer id;
 
-    private String sectionName;
+    private String sectionname;
 
-    private Integer parentSection;
+    private Integer parentsection;
 
-    private String sectionDescription;
+    private String sectiondescription;
 
     public Integer getId() {
         return id;
@@ -17,27 +17,27 @@ public class SubSection {
         this.id = id;
     }
 
-    public String getSectionName() {
-        return sectionName;
+    public String getSectionname() {
+        return sectionname;
     }
 
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName == null ? null : sectionName.trim();
+    public void setSectionname(String sectionname) {
+        this.sectionname = sectionname == null ? null : sectionname.trim();
     }
 
-    public Integer getParentSection() {
-        return parentSection;
+    public Integer getParentsection() {
+        return parentsection;
     }
 
-    public void setParentSection(Integer parentSection) {
-        this.parentSection = parentSection;
+    public void setParentsection(Integer parentsection) {
+        this.parentsection = parentsection;
     }
 
-    public String getSectionDescription() {
-        return sectionDescription;
+    public String getSectiondescription() {
+        return sectiondescription;
     }
 
-    public void setSectionDescription(String sectionDescription) {
-        this.sectionDescription = sectionDescription == null ? null : sectionDescription.trim();
+    public void setSectiondescription(String sectiondescription) {
+        this.sectiondescription = sectiondescription == null ? null : sectiondescription.trim();
     }
 }

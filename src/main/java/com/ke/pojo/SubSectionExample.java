@@ -164,133 +164,133 @@ public class SubSectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameIsNull() {
-            addCriterion("section_name is null");
+        public Criteria andSectionnameIsNull() {
+            addCriterion("sectionName is null");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameIsNotNull() {
-            addCriterion("section_name is not null");
+        public Criteria andSectionnameIsNotNull() {
+            addCriterion("sectionName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameEqualTo(String value) {
-            addCriterion("section_name =", value, "sectionName");
+        public Criteria andSectionnameEqualTo(String value) {
+            addCriterion("sectionName =", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameNotEqualTo(String value) {
-            addCriterion("section_name <>", value, "sectionName");
+        public Criteria andSectionnameNotEqualTo(String value) {
+            addCriterion("sectionName <>", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameGreaterThan(String value) {
-            addCriterion("section_name >", value, "sectionName");
+        public Criteria andSectionnameGreaterThan(String value) {
+            addCriterion("sectionName >", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameGreaterThanOrEqualTo(String value) {
-            addCriterion("section_name >=", value, "sectionName");
+        public Criteria andSectionnameGreaterThanOrEqualTo(String value) {
+            addCriterion("sectionName >=", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameLessThan(String value) {
-            addCriterion("section_name <", value, "sectionName");
+        public Criteria andSectionnameLessThan(String value) {
+            addCriterion("sectionName <", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameLessThanOrEqualTo(String value) {
-            addCriterion("section_name <=", value, "sectionName");
+        public Criteria andSectionnameLessThanOrEqualTo(String value) {
+            addCriterion("sectionName <=", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameLike(String value) {
-            addCriterion("section_name like", value, "sectionName");
+        public Criteria andSectionnameLike(String value) {
+            addCriterion("sectionName like", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameNotLike(String value) {
-            addCriterion("section_name not like", value, "sectionName");
+        public Criteria andSectionnameNotLike(String value) {
+            addCriterion("sectionName not like", value, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameIn(List<String> values) {
-            addCriterion("section_name in", values, "sectionName");
+        public Criteria andSectionnameIn(List<String> values) {
+            addCriterion("sectionName in", values, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameNotIn(List<String> values) {
-            addCriterion("section_name not in", values, "sectionName");
+        public Criteria andSectionnameNotIn(List<String> values) {
+            addCriterion("sectionName not in", values, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameBetween(String value1, String value2) {
-            addCriterion("section_name between", value1, value2, "sectionName");
+        public Criteria andSectionnameBetween(String value1, String value2) {
+            addCriterion("sectionName between", value1, value2, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andSectionNameNotBetween(String value1, String value2) {
-            addCriterion("section_name not between", value1, value2, "sectionName");
+        public Criteria andSectionnameNotBetween(String value1, String value2) {
+            addCriterion("sectionName not between", value1, value2, "sectionname");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionIsNull() {
-            addCriterion("parent_section is null");
+        public Criteria andParentsectionIsNull() {
+            addCriterion("parentSection is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionIsNotNull() {
-            addCriterion("parent_section is not null");
+        public Criteria andParentsectionIsNotNull() {
+            addCriterion("parentSection is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionEqualTo(Integer value) {
-            addCriterion("parent_section =", value, "parentSection");
+        public Criteria andParentsectionEqualTo(Integer value) {
+            addCriterion("parentSection =", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionNotEqualTo(Integer value) {
-            addCriterion("parent_section <>", value, "parentSection");
+        public Criteria andParentsectionNotEqualTo(Integer value) {
+            addCriterion("parentSection <>", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionGreaterThan(Integer value) {
-            addCriterion("parent_section >", value, "parentSection");
+        public Criteria andParentsectionGreaterThan(Integer value) {
+            addCriterion("parentSection >", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("parent_section >=", value, "parentSection");
+        public Criteria andParentsectionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parentSection >=", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionLessThan(Integer value) {
-            addCriterion("parent_section <", value, "parentSection");
+        public Criteria andParentsectionLessThan(Integer value) {
+            addCriterion("parentSection <", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionLessThanOrEqualTo(Integer value) {
-            addCriterion("parent_section <=", value, "parentSection");
+        public Criteria andParentsectionLessThanOrEqualTo(Integer value) {
+            addCriterion("parentSection <=", value, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionIn(List<Integer> values) {
-            addCriterion("parent_section in", values, "parentSection");
+        public Criteria andParentsectionIn(List<Integer> values) {
+            addCriterion("parentSection in", values, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionNotIn(List<Integer> values) {
-            addCriterion("parent_section not in", values, "parentSection");
+        public Criteria andParentsectionNotIn(List<Integer> values) {
+            addCriterion("parentSection not in", values, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionBetween(Integer value1, Integer value2) {
-            addCriterion("parent_section between", value1, value2, "parentSection");
+        public Criteria andParentsectionBetween(Integer value1, Integer value2) {
+            addCriterion("parentSection between", value1, value2, "parentsection");
             return (Criteria) this;
         }
 
-        public Criteria andParentSectionNotBetween(Integer value1, Integer value2) {
-            addCriterion("parent_section not between", value1, value2, "parentSection");
+        public Criteria andParentsectionNotBetween(Integer value1, Integer value2) {
+            addCriterion("parentSection not between", value1, value2, "parentsection");
             return (Criteria) this;
         }
     }

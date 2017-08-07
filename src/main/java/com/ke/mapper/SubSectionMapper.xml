@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ke.mapper.SubSectionMapper" >
+
+  <select id="selectAllSubSection" resultType="com.ke.pojo.SubSection">
+      SELECT *FROM sub_section;
+  </select>
+
   <resultMap id="BaseResultMap" type="com.ke.pojo.SubSection" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="section_name" property="sectionName" jdbcType="VARCHAR" />
-    <result column="parent_section" property="parentSection" jdbcType="INTEGER" />
+    <result column="sectionName" property="sectionName" jdbcType="VARCHAR" />
+    <result column="parentSection" property="parentSection" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ke.pojo.SubSection" extends="BaseResultMap" >
-    <result column="section_description" property="sectionDescription" jdbcType="LONGVARCHAR" />
+    <result column="sectionDescription" property="sectionDescription" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,10 +73,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, section_name, parent_section
+    id, sectionName, parentSection
   </sql>
   <sql id="Blob_Column_List" >
-    section_description
+    sectionDescription
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ke.pojo.SubSectionExample" >
     select
@@ -122,9 +127,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ke.pojo.SubSection" >
-    insert into sub_section (id, section_name, parent_section, 
-      section_description)
-    values (#{id,jdbcType=INTEGER}, #{sectionName,jdbcType=VARCHAR}, #{parentSection,jdbcType=INTEGER}, 
+    insert into sub_section (id, sectionName, parentSection, 
+      sectionDescription)
+    values (#{id,jdbcType=INTEGER}, #{sectionName,jdbcType=VARCHAR}, #{parentSection,jdbcType=INTEGER},
       #{sectionDescription,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ke.pojo.SubSection" >
@@ -134,13 +139,13 @@
         id,
       </if>
       <if test="sectionName != null" >
-        section_name,
+        sectionName,
       </if>
       <if test="parentSection != null" >
-        parent_section,
+        parentSection,
       </if>
       <if test="sectionDescription != null" >
-        section_description,
+        sectionDescription,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -171,13 +176,13 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.sectionName != null" >
-        section_name = #{record.sectionName,jdbcType=VARCHAR},
+        sectionName = #{record.sectionName,jdbcType=VARCHAR},
       </if>
       <if test="record.parentSection != null" >
-        parent_section = #{record.parentSection,jdbcType=INTEGER},
+        parentSection = #{record.parentSection,jdbcType=INTEGER},
       </if>
       <if test="record.sectionDescription != null" >
-        section_description = #{record.sectionDescription,jdbcType=LONGVARCHAR},
+        sectionDescription = #{record.sectionDescription,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -187,9 +192,9 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update sub_section
     set id = #{record.id,jdbcType=INTEGER},
-      section_name = #{record.sectionName,jdbcType=VARCHAR},
-      parent_section = #{record.parentSection,jdbcType=INTEGER},
-      section_description = #{record.sectionDescription,jdbcType=LONGVARCHAR}
+      sectionName = #{record.sectionName,jdbcType=VARCHAR},
+      parentSection = #{record.parentSection,jdbcType=INTEGER},
+      sectionDescription = #{record.sectionDescription,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,8 +202,8 @@
   <update id="updateByExample" parameterType="map" >
     update sub_section
     set id = #{record.id,jdbcType=INTEGER},
-      section_name = #{record.sectionName,jdbcType=VARCHAR},
-      parent_section = #{record.parentSection,jdbcType=INTEGER}
+      sectionName = #{record.sectionName,jdbcType=VARCHAR},
+      parentSection = #{record.parentSection,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,28 +212,28 @@
     update sub_section
     <set >
       <if test="sectionName != null" >
-        section_name = #{sectionName,jdbcType=VARCHAR},
+        sectionName = #{sectionName,jdbcType=VARCHAR},
       </if>
       <if test="parentSection != null" >
-        parent_section = #{parentSection,jdbcType=INTEGER},
+        parentSection = #{parentSection,jdbcType=INTEGER},
       </if>
       <if test="sectionDescription != null" >
-        section_description = #{sectionDescription,jdbcType=LONGVARCHAR},
+        sectionDescription = #{sectionDescription,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ke.pojo.SubSection" >
     update sub_section
-    set section_name = #{sectionName,jdbcType=VARCHAR},
-      parent_section = #{parentSection,jdbcType=INTEGER},
-      section_description = #{sectionDescription,jdbcType=LONGVARCHAR}
+    set sectionName = #{sectionName,jdbcType=VARCHAR},
+      parentSection = #{parentSection,jdbcType=INTEGER},
+      sectionDescription = #{sectionDescription,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ke.pojo.SubSection" >
     update sub_section
-    set section_name = #{sectionName,jdbcType=VARCHAR},
-      parent_section = #{parentSection,jdbcType=INTEGER}
+    set sectionName = #{sectionName,jdbcType=VARCHAR},
+      parentSection = #{parentSection,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

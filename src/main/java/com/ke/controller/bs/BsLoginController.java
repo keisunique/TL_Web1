@@ -1,8 +1,10 @@
 package com.ke.controller.bs;
 
 import com.ke.pojo.Section;
+import com.ke.pojo.SubSection;
 import com.ke.pojo.User;
 import com.ke.service.SectionService;
+import com.ke.service.SubSectionService;
 import com.ke.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -38,6 +40,9 @@ public class BsLoginController {
 
     @Autowired
     private SectionService sectionService;
+
+    @Autowired
+    private SubSectionService subSectionService;
 
     /**
      * 后台登陆页面请求GET
@@ -105,16 +110,35 @@ public class BsLoginController {
      * @return 一级版块管理页面
      */
     @RequiresRoles("admin")
-    @RequestMapping(value = "/category",method = RequestMethod.GET)
-    public String category(Model model){
+    @RequestMapping(value = "/category/{id}",method = RequestMethod.GET)
+    public String category(Model model, @PathVariable("id") String id){
 
-        List<Section> sections = sectionService.getAllSection();
+        if(id.equals("1")){
+            List<Section> sections = sectionService.getAllSection();
 
-        Integer count = sections.size();
+            Integer count = sections.size();
 
-        model.addAttribute("sections",sections);
-        model.addAttribute("count",count);
+            model.addAttribute("sections",sections);
 
+            model.addAttribute("count",count);
+
+            return "bs/admin/category";
+
+        }else if(id.equals("2")){
+
+            List<Section> sections = sectionService.getAllSection();
+            List<SubSection> subSections = subSectionService.getAllSubSection();
+
+            Integer count = subSections.size();
+
+            model.addAttribute("subsections",subSections);
+            model.addAttribute("sections",sections);
+            model.addAttribute("pSecNameMap",subSectionService.getParentSecName(subSections));
+
+            model.addAttribute("count",count);
+
+            return "bs/admin/category2";
+        }
         return "bs/admin/category";
     }
 
@@ -138,10 +162,36 @@ public class BsLoginController {
 
         mv.addObject("sections",sections);
 
-        mv.setViewName("redirect:/bs/category");
+        mv.setViewName("redirect:/bs/category/1");
 
         return mv;
     }
+    @RequiresRoles("admin")
+    @RequestMapping(value = "/category2/{action}/{id}",method = RequestMethod.POST)
+    public ModelAndView addSubSection(SubSection subSection , @PathVariable("action")String action,
+                                   @PathVariable("id")Integer id){
+
+        ModelAndView mv = new ModelAndView();
+
+        if(action.equals("add")){//增加二级版块
+            subSection.setId(null);
+            subSectionService.insertSubSection(subSection);
+        }else if(action.equals("delete")){//删除一级版块
+            subSectionService.deleteSubSection(subSection);
+        }else if(action.equals("update")){
+            subSectionService.updateSubSection(subSection);
+        }
+
+        List<Section> sections = sectionService.getAllSection();
+
+        mv.addObject("sections",sections);
+
+        mv.setViewName("redirect:/bs/category/2");
+
+        return mv;
+    }
+
+
 
     @RequiresRoles("admin")
     @RequestMapping(value = "/delItems",method = RequestMethod.POST)
