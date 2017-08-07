@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50552
 File Encoding         : 65001
 
-Date: 2017-08-03 16:37:22
+Date: 2017-08-07 14:00:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,7 +83,7 @@ CREATE TABLE `section` (
   `sectionDescription` varchar(255) DEFAULT NULL,
   `pageView` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of section
@@ -91,9 +91,7 @@ CREATE TABLE `section` (
 INSERT INTO `section` VALUES ('1', 'Java', 'Java版块描述', null);
 INSERT INTO `section` VALUES ('2', 'MySQL', 'MySQL数据库版块', null);
 INSERT INTO `section` VALUES ('3', 'C', 'C语言版块', null);
-INSERT INTO `section` VALUES ('8', 'zxc', 'zxc', null);
-INSERT INTO `section` VALUES ('34', 'test2', 'test2', null);
-INSERT INTO `section` VALUES ('35', 'zzz', 'zzz', null);
+INSERT INTO `section` VALUES ('36', 'C++', 'C++', null);
 
 -- ----------------------------
 -- Table structure for sub_section
@@ -134,6 +132,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('ke', '202cb962ac59075b964b07152d234b70', '123', '2017-08-01', '1', '1', '0');
-INSERT INTO `user` VALUES ('ke2', '202cb962ac59075b964b07152d234b70', '123', '2017-08-02', '1', '2', '0');
+INSERT INTO `user` VALUES ('as', '02bdb3bdd873667826273777f7993dad', 'a41152ddee64a229afe092db5b37268c', '2017-08-06', '0', '1', '0');
+INSERT INTO `user` VALUES ('ke', '028be8c51d5e1bab573121f32c2fa987', '36f0bd99cb8065a9eb272c116e2b5b75', '2017-08-07', '0', '1', '0');
+INSERT INTO `user` VALUES ('ke2', 'bade28ce4999769fdb6085b41121f5cd', '1420f44c93ba805b633c17d4e6134d4f', '2017-08-02', '1', '1', '0');
 INSERT INTO `user` VALUES ('ke3', '202cb962ac59075b964b07152d234b70', '123', '2017-08-02', '1', '3', '0');
+INSERT INTO `user` VALUES ('user', 'c8ef75184b2c5d27049c27b94bffb576', '12ee962d122a6c64d8e0e6da2ae8f8ab', '2017-08-07', '0', '2', '0');
