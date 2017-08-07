@@ -79,7 +79,8 @@
           <li><a href="comment.html">资源管理</a></li>
           <li><a class="dropdown-toggle" id="userMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户管理</a>
             <ul class="dropdown-menu" aria-labelledby="userMenu">
-              <li><a data-toggle="modal" data-target="#areDeveloping">管理员</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/managemoderatorpage">版主</a></li>
               <li><a href="${pageContext.request.contextPath}/bs/manageuserpage">会员</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="loginlog.html">登录日志</a></li>
@@ -91,10 +92,11 @@
         <ul class="nav nav-sidebar">
           <li><a class="dropdown-toggle" id="userMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">数据报表</a>
             <ul class="dropdown-menu" aria-labelledby="userMenu">
-              <li><a data-toggle="modal" data-target="#areDeveloping">管理用户组</a></li>
-              <li><a href="manage-user.jsp">管理用户</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/managemoderatorpage">版主</a></li>
+              <li><a href="${pageContext.request.contextPath}/bs/manageuserpage">会员</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="loginlog.html">管理登录日志</a></li>
+              <li><a href="loginlog.html">登录日志</a></li>
             </ul>
           </li>
           <li><a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown"

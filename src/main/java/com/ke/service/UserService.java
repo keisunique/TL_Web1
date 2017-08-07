@@ -29,5 +29,13 @@ public interface UserService {
 
     int insertUser(User user);
 
+    int updateUser(User user);
+
+    int deleteUser(String username);
+
+    int lockUser(User user);
+
+    int lockUserByUsername(String lockname);
+
 
 }

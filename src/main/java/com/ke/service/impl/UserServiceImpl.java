@@ -50,9 +50,7 @@ public class UserServiceImpl implements UserService {
      * @return 用户对象
      */
     public User findUserByUsername(String username) {
-
         return userMapper.selectByPrimaryKey(username);
-
     }
 
 
@@ -97,5 +95,27 @@ public class UserServiceImpl implements UserService {
 
     public int insertUser(User user) {
         return userMapper.insert(user);
+    }
+
+    public int updateUser(User user) {
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public int deleteUser(String username) {
+        return userMapper.deleteByPrimaryKey(username);
+    }
+
+    public int lockUser(User user) {
+
+        return lockUserByUsername(user.getUsername());
+    }
+
+    public int lockUserByUsername(String lockname) {
+
+        User user = userMapper.selectByPrimaryKey(lockname);
+
+        user.setLocked(user.getLocked()==1?0:1);
+
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 }

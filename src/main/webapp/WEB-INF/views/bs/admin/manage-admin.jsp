@@ -148,9 +148,10 @@
                 <td>${admin.loginTimes}</td>
                 <td>${admin.locked==0?"正常":"禁用"}</td>
                 <td>
-                  <a data-toggle="modal" data-target="#update">修改</a>
-                  <a rel="1" name="delete">删除</a>
-                  <a href="${pageContext.request.contextPath}/bs/user/lock?lockuser=${admin.username}">${admin.locked==0?"禁用":"启用"}</a></td>
+                  <a rel="${admin.username}" name="update">修改</a>
+                  <a rel="${admin.username}" name="delete" >删除</a>
+                  <a rel="${admin.username}" name="lock">${admin.locked==0?"禁用":"启用"}</a>
+                </td>
               </tr>
             </c:forEach>
 
@@ -158,6 +159,7 @@
           </table>
         </div>
     </div>
+
   </div>
 
 
@@ -222,19 +224,24 @@
             <tbody>
               <tr>
                 <td wdith="20%">用户名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="username" name="username" maxlength="10" autocomplete="off" /></td>
+                <td width="80%">
+                  <input type="text" value="" class="form-control"
+                         id="username" name="username" maxlength="10" autocomplete="off"
+                         readonly="readonly"/>
+                  <input type="hidden" name="roleId" value="1">
+                </td>
               </tr>
               <tr>
                 <td wdith="20%">旧密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="oldPassword" maxlength="18" autocomplete="off" /></td>
-              </tr>
-              <tr>
-                <td wdith="20%">新密码:</td>
                 <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
               </tr>
               <tr>
-                <td wdith="20%">确认密码:</td>
+                <td wdith="20%">新密码:</td>
                 <td width="80%"><input type="password" class="form-control" name="newPassword" maxlength="18" autocomplete="off" /></td>
+              </tr>
+              <tr>
+                <td wdith="20%">确认密码:</td>
+                <td width="80%"><input type="password" class="form-control" name="confirmPassword" maxlength="18" autocomplete="off" /></td>
               </tr>
             </tbody>
             <tfoot>
@@ -384,8 +391,12 @@
 $(function () {
     $("#main table tbody tr td a").click(function () {
         var name = $(this);
-        var id = name.attr("rel"); //对应id
+
+
         if (name.attr("name") === "update") {
+            var username = name.attr("rel"); //对应id
+            $('#username').val(username);
+            $("#update").modal("show");
           /* $.ajax({
                 type: "POST",
                 url: "/User/see",
@@ -401,18 +412,32 @@ $(function () {
                 }
             });*/
         } else if (name.attr("name") === "delete") {
-            if (window.confirm("此操作不可逆，是否确认？")) {
+            if (window.confirm("是否确认删除？")) {
+                var username = name.attr("rel"); //对应id
                 $.ajax({
                     type: "POST",
-                    url: "/User/delete",
-                    data: "id=" + id,
+                    url: "/bs/user/delete",
+                    data: {username:username},
                     cache: false, //不缓存此页面   
                     success: function (data) {
                         window.location.reload();
                     }
                 });
-            };
-        };
+            }
+        }else if(name.attr("name") === "lock"){
+            if (window.confirm("是否（启用/禁用）？")) {
+                var lockname = name.attr("rel"); //对应id
+                $.ajax({
+                    type: "POST",
+                    url: "/bs/user/lock",
+                    data: {lockname:lockname},
+                    cache: false, //不缓存此页面
+                    success: function (data) {
+                        window.location.reload();
+                    }
+                });
+            }
+        }
     });
 });
 </script>

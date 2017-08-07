@@ -49,11 +49,13 @@ public class UserRealm extends AuthorizingRealm {
         //token封装了用户的信息
         String username = (String) token.getPrincipal();
 
-        User user = userService.findUserByUsername(username);
+        User user = null;
+
+        user = userService.findUserByUsername(username);
 
         System.out.println("realm: username:"+username+"password"+user.getPassword());
 
-        if(user == null) {
+        if(user==null) {
             throw new UnknownAccountException();//没找到帐号
         }
 
@@ -65,6 +67,7 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.getUsername(), //用户名
                 user.getPassword(), //密码
+                ByteSource.Util.bytes(user.getCredentialsSalt()),
                 this.getName()  //realm name
         );
         return authenticationInfo;

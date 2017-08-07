@@ -147,7 +147,11 @@
                 </td>
                 <td>${user.loginTimes}</td>
                 <td>${user.locked==0?"正常":"禁用"}</td>
-                <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
+                <td>
+                  <a rel="${user.username}" name="update">修改</a>
+                  <a rel="${user.username}" name="delete" >删除</a>
+                  <a rel="${user.username}" name="lock">${user.locked==0?"禁用":"启用"}</a>
+                </td>
               </tr>
             </c:forEach>
 
@@ -162,7 +166,7 @@
 <!--增加用户模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="/User/add" method="post" autocomplete="off" draggable="false">
+    <form action="${pageContext.request.contextPath}/bs/user/insert" method="post" autocomplete="off" draggable="false">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -176,6 +180,7 @@
             <tbody>
               <tr>
                 <td wdith="20%">用户名:</td>
+                <input type="hidden" name="roleId" value="3">
                 <td width="80%"><input type="text" value="" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
               </tr>
               <tr>
@@ -204,7 +209,7 @@
 <!--用户信息模态框-->
 <div class="modal fade" id="seeUser" tabindex="-1" role="dialog" aria-labelledby="seeUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="/User/update" method="post" autocomplete="off" draggable="false">
+    <form action="${pageContext.request.contextPath}/bs/user/update" method="post" autocomplete="off" draggable="false">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -218,7 +223,11 @@
             <tbody>
               <tr>
                 <td wdith="20%">姓名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" id="truename" name="truename" maxlength="10" autocomplete="off" /></td>
+                <td width="80%">
+                  <input type="text" value="" class="form-control" id="truename" name="truename" maxlength="10" autocomplete="off" readonly="readonly"/>
+                  <input type="hidden" name="roleId" value="3">
+                </td>
+
               </tr>
               <tr>
                 <td wdith="20%">用户名:</td>
@@ -399,40 +408,45 @@
 <script src="${pageContext.request.contextPath}/statics/bspage/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/bspage/js/admin-scripts.js"></script>
 <script>
-$(function () {
-    $("#main table tbody tr td a").click(function () {
-        var name = $(this);
-        var id = name.attr("rel"); //对应id   
-        if (name.attr("name") === "see") {
-            $.ajax({
-                type: "POST",
-                url: "/User/see",
-                data: "id=" + id,
-                cache: false, //不缓存此页面   
-                success: function (data) {
-                    var data = JSON.parse(data);
-					$('#truename').val(data.truename);
-					$('#username').val(data.username);
-					$('#usertel').val(data.usertel);
-					$('#userid').val(data.userid);
-                    $('#seeUser').modal('show');
+    $(function () {
+        $("#main table tbody tr td a").click(function () {
+            var name = $(this);
+
+            if (name.attr("name") === "update") {
+                var username = name.attr("rel"); //对应id
+                $('#username').val(username);
+                $("#update").modal("show");
+
+            } else if (name.attr("name") === "delete") {
+                if (window.confirm("是否确认删除？")) {
+                    var username = name.attr("rel"); //对应id
+                    $.ajax({
+                        type: "POST",
+                        url: "/bs/user/delete",
+                        data: {username:username},
+                        cache: false, //不缓存此页面
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    });
                 }
-            });
-        } else if (name.attr("name") === "delete") {
-            if (window.confirm("此操作不可逆，是否确认？")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/User/delete",
-                    data: "id=" + id,
-                    cache: false, //不缓存此页面   
-                    success: function (data) {
-                        window.location.reload();
-                    }
-                });
-            };
-        };
+
+            }else if(name.attr("name") === "lock"){
+                if (window.confirm("是否（启用/禁用）？")) {
+                    var lockname = name.attr("rel"); //对应id
+                    $.ajax({
+                        type: "POST",
+                        url: "/bs/user/lock",
+                        data: {lockname:lockname},
+                        cache: false, //不缓存此页面
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            }
+        });
     });
-});
 </script>
 </body>
 </html>

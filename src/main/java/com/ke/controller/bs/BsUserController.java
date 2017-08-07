@@ -59,6 +59,7 @@ public class BsUserController {
         List<User> moderators = userService.selectAllModerator();
 
         model.addAttribute("moderators",moderators);
+        model.addAttribute("count",moderators.size());
 
         return "bs/admin/manage-moderator";
     }
@@ -66,50 +67,52 @@ public class BsUserController {
 
     @RequestMapping(value = "/user/{action}")
     public ModelAndView addUser(@PathVariable("action") String action, User user,
-                                @RequestParam(defaultValue = "null") String lockname ){
+                                @RequestParam(defaultValue = "null") String lockname ,
+                                String newPassword,String confirmPassword){
 
         ModelAndView mv = new ModelAndView();
+
 
         if(action.equals("insert")){
             user.setRegistrationTime(new Date());
             user.setLocked(0);
             user.setLoginTimes(0);
-            user.setSalt("123");
             userService.insertUser(ph.encryptPassword(user));
 
         }else if(action.equals("update")){
-            if(ph.confirmPassword(user)){
-                //如果账号与密码匹配则修改账号密码
-
-            }else{
-                //不匹配返回错误信息
-            }
+            //如果账号与密码匹配则修改账号密码
+            user.setPassword(newPassword);
+            userService.updateUser(ph.encryptPassword(user));
 
         }else if(action.equals("delete")){
-
+            user = userService.findUserByUsername(user.getUsername());
+            userService.deleteUser(user.getUsername());
 
         }else if(action.equals("lock")){
-
-
+            userService.lockUserByUsername(lockname);
+            user = userService.findUserByUsername(lockname);
         }
 
-        int i = user.getRoleId();
+        Integer i = user.getRoleId();
         switch (i){
             case 1 :
                 mv.addObject("users",userService.selectAllAdmin());
-                mv.setViewName("redirect:/bs/managemoderatorpage");
+                mv.setViewName("redirect:/bs/manageadminpage");
+                return mv;
             case 2 :
                 mv.addObject("users",userService.selectAllAdmin());
                 mv.setViewName("redirect:/bs/managemoderatorpage");
+                return mv;
 
             case 3 :
                 mv.addObject("users",userService.selectAllAdmin());
                 mv.setViewName("redirect:/bs/managemoderatorpage");
+                return mv;
 
             default:return mv;
         }
 
-    }
 
+    }
 
 }
