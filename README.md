@@ -6,6 +6,11 @@
 
 采用框架：Spring+SpringMVC+MyBatis+Shiro
 
+服务器：Tomcat
+
+开发工具：IDEA
+
+数据库：MySql
 
 
 
