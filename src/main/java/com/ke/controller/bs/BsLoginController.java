@@ -1,5 +1,6 @@
 package com.ke.controller.bs;
 
+import com.ke.log.LogController;
 import com.ke.pojo.Section;
 import com.ke.pojo.SubSection;
 import com.ke.pojo.User;
@@ -61,6 +62,7 @@ public class BsLoginController {
      * @param session 登陆成功后设置session
      * @return 登陆成功返回后台主界面，失败返回登陆页面
      */
+    @LogController(description = "用户登陆")
     @RequestMapping(value = "/loginreq",method = RequestMethod.POST)
     public String loginRequest(HttpServletRequest req, Model model, HttpSession session){
 
