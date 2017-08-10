@@ -3,15 +3,15 @@ package com.ke.pojo;
 public class Item {
     private Integer id;
 
-    private String itemTitle;
+    private String itemtitle;
 
-    private String itemUrl;
+    private String itemurl;
 
-    private Integer viewTimes;
+    private Integer viewtimes;
 
-    private Integer sectionId;
+    private Integer sectionid;
 
-    private String itemDescription;
+    private String itemdescription;
 
     public Integer getId() {
         return id;
@@ -21,43 +21,43 @@ public class Item {
         this.id = id;
     }
 
-    public String getItemTitle() {
-        return itemTitle;
+    public String getItemtitle() {
+        return itemtitle;
     }
 
-    public void setItemTitle(String itemTitle) {
-        this.itemTitle = itemTitle == null ? null : itemTitle.trim();
+    public void setItemtitle(String itemtitle) {
+        this.itemtitle = itemtitle == null ? null : itemtitle.trim();
     }
 
-    public String getItemUrl() {
-        return itemUrl;
+    public String getItemurl() {
+        return itemurl;
     }
 
-    public void setItemUrl(String itemUrl) {
-        this.itemUrl = itemUrl == null ? null : itemUrl.trim();
+    public void setItemurl(String itemurl) {
+        this.itemurl = itemurl == null ? null : itemurl.trim();
     }
 
-    public Integer getViewTimes() {
-        return viewTimes;
+    public Integer getViewtimes() {
+        return viewtimes;
     }
 
-    public void setViewTimes(Integer viewTimes) {
-        this.viewTimes = viewTimes;
+    public void setViewtimes(Integer viewtimes) {
+        this.viewtimes = viewtimes;
     }
 
-    public Integer getSectionId() {
-        return sectionId;
+    public Integer getSectionid() {
+        return sectionid;
     }
 
-    public void setSectionId(Integer sectionId) {
-        this.sectionId = sectionId;
+    public void setSectionid(Integer sectionid) {
+        this.sectionid = sectionid;
     }
 
-    public String getItemDescription() {
-        return itemDescription;
+    public String getItemdescription() {
+        return itemdescription;
     }
 
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription == null ? null : itemDescription.trim();
+    public void setItemdescription(String itemdescription) {
+        this.itemdescription = itemdescription == null ? null : itemdescription.trim();
     }
 }

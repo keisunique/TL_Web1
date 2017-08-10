@@ -1,17 +1,20 @@
-<!doctype html>
-<html lang="zh-CN">
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>文章 - 异清轩博客管理系统</title>
-<link rel="stylesheet" type="text/css" href="/statics/bspage/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/statics/bspage/css/style.css">
-<link rel="stylesheet" type="text/css" href="/statics/bspage/css/font-awesome.min.css">
-<link rel="apple-touch-icon-precomposed" href="/statics/bspage/images/icon/icon.png">
-<link rel="shortcut icon" href="/statics/bspage/images/icon/favicon.ico">
-<script src="/statics/bspage/js/jquery-2.1.4.min.js"></script>
+<title>资源管理 - Learn together</title>
+
+  <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/bootstrap.min.css">
+  <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/style.css">
+  <link rel="stylesheet"  href="${pageContext.request.contextPath}/statics/bspage/css/font-awesome.min.css">
+  <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/statics/bspage/images/icon/icon.png">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/statics/bspage/images/icon/favicon.ico">
+  <script src="${pageContext.request.contextPath}/statics/bspage/js/jquery-2.1.4.min.js"></script>
 <!--[if gte IE 9]>
   <script src="/statics/bspage/js/jquery-1.11.1.min.js" type="text/javascript"></script>
   <script src="/statics/bspage/js/html5shiv.min.js" type="text/javascript"></script>
@@ -25,22 +28,26 @@
 
 <body class="user-select">
 <section class="container-fluid">
+
+  <!--顶部菜单-->
   <header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a class="navbar-brand" href="/">YlsatCMS</a> </div>
+          <a class="navbar-brand" href="#">Learning Together</a>
+        </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="">消息 <span class="badge">1</span></a></li>
-            <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+            <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${username} <span class="caret"></span></a>
               <ul class="dropdown-menu dropdown-menu-left">
                 <li><a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo">个人信息</a></li>
                 <li><a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog">登录记录</a></li>
               </ul>
             </li>
-            <li><a href="login.html" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+            <li><a href="/bs/logout" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
             <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
           </ul>
           <form action="" method="post" class="navbar-form navbar-right" role="search">
@@ -48,137 +55,101 @@
               <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15">
               <span class="input-group-btn">
               <button class="btn btn-default" type="submit">搜索</button>
-              </span> </div>
+              </span>
+            </div>
           </form>
         </div>
       </div>
     </nav>
   </header>
   <div class="row">
+    <!--侧边菜单-->
     <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li><a href="index.jsp">报告</a></li>
+        <li><a>信息总览</a></li>
       </ul>
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="article.html">文章</a></li>
-        <li><a href="notice.html">公告</a></li>
-        <li><a href="comment.html">评论</a></li>
-        <li><a data-toggle="tooltip" data-placement="top" title="网站暂无留言功能">留言</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="category.jsp">栏目</a></li>
-        <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a>
-          <ul class="dropdown-menu" aria-labelledby="otherMenu">
-            <li><a href="flink.html">友情链接</a></li>
-            <li><a href="loginlog.html">访问记录</a></li>
+        <li><a class="dropdown-toggle" id="userMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">版块管理</a>
+          <ul class="dropdown-menu" aria-labelledby="userMenu">
+            <li><a href="${pageContext.request.contextPath}/bs/category/1">一级版块</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/category/2">二级版块</a></li>
           </ul>
         </li>
+        <li><a href="${pageContext.request.contextPath}/bs/item">资源管理</a></li>
+        <li><a class="dropdown-toggle" id="userMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户管理</a>
+          <ul class="dropdown-menu" aria-labelledby="userMenu">
+            <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/managemoderatorpage">版主</a></li>
+            <li><a href="${pageContext.request.contextPath}/bs/manageuserpage">会员</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="loginlog.html">登录日志</a></li>
+          </ul>
+        </li>
+        <li><a href="item.jsp">留言管理</a></li>
+        <%--<li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>--%>
       </ul>
       <ul class="nav nav-sidebar">
-        <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户</a>
+        <li><a class="dropdown-toggle" id="userMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">数据报表</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a href="#">管理用户组</a></li>
+            <li><a data-toggle="modal" data-target="#areDeveloping">管理用户组</a></li>
             <li><a href="manage-user.jsp">管理用户</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="loginlog.html">管理登录日志</a></li>
           </ul>
         </li>
-        <li><a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
+        <li><a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">网站设置</a>
           <ul class="dropdown-menu" aria-labelledby="settingMenu">
             <li><a href="setting.html">基本设置</a></li>
-            <li><a href="readset.html">用户设置</a></li>
+            <li><a href="readset.html">阅读设置</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">安全配置</a></li>
+            <li><a data-toggle="modal" data-target="#areDeveloping">安全配置</a></li>
             <li role="separator" class="divider"></li>
             <li class="disabled"><a>扩展菜单</a></li>
           </ul>
         </li>
       </ul>
     </aside>
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
       <form action="/Article/checkAll" method="post" >
         <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
           <li><a href="add-article.jsp">增加文章</a></li>
         </ol>
-        <h1 class="page-header">管理 <span class="badge">7</span></h1>
+        <h1 class="page-header">选择版块</h1>
+        <select id="item-select" class="form-control" name="parentSection" >
+          <c:forEach var="subsection" items="${subsections}">
+            <option value="${subsection.id}">${subsection.sectionname}</option>
+          </c:forEach>
+
+        </select></br>
+        <h1 class="page-header">管理 <span class="badge">${items.size()}</span></h1>
         <div class="table-responsive">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">选择</span></th>
                 <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">标题</span></th>
-                <th><span class="glyphicon glyphicon-list"></span> <span class="visible-lg">栏目</span></th>
-                <th class="hidden-sm"><span class="glyphicon glyphicon-tag"></span> <span class="visible-lg">标签</span></th>
-                <th class="hidden-sm"><span class="glyphicon glyphicon-comment"></span> <span class="visible-lg">评论</span></th>
-                <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">日期</span></th>
+                <th><span class="glyphicon glyphicon-list"></span> <span class="visible-lg">描述</span></th>
+                <th class="hidden-sm"><span class="glyphicon glyphicon-tag"></span> <span class="visible-lg">url</span></th>
+                <th class="hidden-sm"><span class="glyphicon glyphicon-comment"></span> <span class="visible-lg">访问量</span></th>
+                <th class="hidden-sm"><span class="glyphicon glyphicon-comment"></span> <span class="visible-lg">所属版块</span></th>
                 <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="update-article.html">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题</td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">PHP、JavaScript</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
+              <C:forEach var="item" items="${items}">
+                <tr>
+                  <td><input type="checkbox" class="input-control" name="checkbox[]" value="${item.id}" /></td>
+                  <td class="article-title">${item.itemtitle}</td>
+                  <td>${item.itemdescription}</td>
+                  <td class="hidden-sm">${item.itemurl}</td>
+                  <td class="hidden-sm">${item.viewtimes}</td>
+                  <td class="hidden-sm">${item.sectionid}</td>
+                  <td><a href="update-article.html">修改</a> <a rel="6">删除</a></td>
+                </tr>
+              </C:forEach>
             </tbody>
           </table>
         </div>
@@ -305,18 +276,7 @@
     </div>
   </div>
 </div>
-<!--微信二维码模态框-->
-<div class="modal fade user-select" id="WeChat" tabindex="-1" role="dialog" aria-labelledby="WeChatModalLabel">
-  <div class="modal-dialog" role="document" style="margin-top:120px;max-width:280px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="WeChatModalLabel" style="cursor:default;">微信扫一扫</h4>
-      </div>
-      <div class="modal-body" style="text-align:center"> <img src="images/weixin.jpg" alt="" style="cursor:pointer"/> </div>
-    </div>
-  </div>
-</div>
+
 <!--提示模态框-->
 <div class="modal fade user-select" id="areDeveloping" tabindex="-1" role="dialog" aria-labelledby="areDevelopingModalLabel">
   <div class="modal-dialog" role="document">
@@ -325,7 +285,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
       </div>
-      <div class="modal-body"> <img src="images/baoman/baoman_01.gif" alt="深思熟虑" />
+      <div class="modal-body"> <img src="${pageContext.request.contextPath}/statics/bspage/images/baoman/baoman_01.gif" alt="深思熟虑" />
         <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
       </div>
       <div class="modal-footer">
@@ -334,18 +294,35 @@
     </div>
   </div>
 </div>
-<!--右键菜单列表-->
-<div id="rightClickMenu">
-  <ul class="list-group rightClickMenuList">
-    <li class="list-group-item disabled">欢迎访问异清轩博客</li>
-    <li class="list-group-item"><span>IP：</span>172.16.10.129</li>
-    <li class="list-group-item"><span>地址：</span>河南省郑州市</li>
-    <li class="list-group-item"><span>系统：</span>Windows10 </li>
-    <li class="list-group-item"><span>浏览器：</span>Chrome47</li>
-  </ul>
-</div>
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/admin-scripts.js"></script> 
+
+<script src="${pageContext.request.contextPath}/statics/bspage/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/statics/bspage/js/admin-scripts.js"></script>
+
+<script>
+$(function () {
+    $("#item-select").change(function () {
+        var id = $(this).val();
+        alert(id);
+        $.ajax({
+            type : "GET",
+            url : "${pageContext.request.contextPath}/bs/sitem/"+id,
+            dataType:"json",
+            cache: false,
+            beforeSend:function () {
+                alert("加载中...")
+            },
+            error:function(){
+              alert("错误");
+            },
+            success: function (data) {
+                alert("data="+data);
+                /*window.location.reload();*/
+            }
+        });
+    })
+})
+</script>
+
 <script>
 //是否确认删除
 $(function(){   

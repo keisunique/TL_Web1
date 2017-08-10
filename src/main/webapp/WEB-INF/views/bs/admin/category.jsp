@@ -86,7 +86,7 @@
               <li><a href="loginlog.html">登录日志</a></li>
             </ul>
           </li>
-          <li><a href="article.html">留言管理</a></li>
+          <li><a href="item.jsp">留言管理</a></li>
           <%--<li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>--%>
         </ul>
         <ul class="nav nav-sidebar">

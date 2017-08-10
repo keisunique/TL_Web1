@@ -2,11 +2,11 @@ package com.ke.mapper;
 
 import com.ke.pojo.Item;
 import com.ke.pojo.ItemExample;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @Mapper
@@ -38,4 +38,6 @@ public interface ItemMapper {
     int updateByPrimaryKeyWithBLOBs(Item record);
 
     int updateByPrimaryKey(Item record);
+
+    List<Item> getAllItem();
 }

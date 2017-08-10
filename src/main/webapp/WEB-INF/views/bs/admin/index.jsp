@@ -75,7 +75,7 @@
             <li><a href="${pageContext.request.contextPath}/bs/category/2">二级版块</a></li>
           </ul>
         </li>
-        <li><a href="comment.html">资源管理</a></li>
+        <li><a href="${pageContext.request.contextPath}/bs/item">资源管理</a></li>
         <li><a class="dropdown-toggle" id="userMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户管理</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
             <li><a href="${pageContext.request.contextPath}/bs/manageadminpage">管理员</a></li>
@@ -85,7 +85,7 @@
             <li><a href="loginlog.html">登录日志</a></li>
           </ul>
         </li>
-        <li><a href="article.html">留言管理</a></li>
+        <li><a href="item.jsp">留言管理</a></li>
         <%--<li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>--%>
       </ul>
       <ul class="nav nav-sidebar">
