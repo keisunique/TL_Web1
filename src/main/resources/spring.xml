@@ -15,8 +15,7 @@
 
     <context:property-placeholder location="classpath:db.properties"/>
 
-    <!--aop支持-->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
 
     <!--支持自动化任务-->
     <task:annotation-driven/>

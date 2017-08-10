@@ -1,9 +1,7 @@
 package com.ke.log;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class LoginInterceptor {
+public class LoginAspect {
 
     //Service层切点
     @Pointcut("@annotation(com.ke.log.LogService)")
@@ -26,7 +24,11 @@ public class LoginInterceptor {
 
 
     @Before("controllerLog()")
-    public void dobefore(){
+    public void dobefore(JoinPoint joinPoint){
+        //获得方法名
+        System.out.println("joinPoint.getSignature().getName()="+joinPoint.getSignature().getName());
+        //获得类全限定名
+        System.out.println("joinPoint.getTarget().getClass().getName()="+joinPoint.getTarget().getClass().getName());
         System.out.println("前置通知");
 
     }
@@ -34,6 +36,8 @@ public class LoginInterceptor {
     public void doAfter(){
         System.out.println("后置通知");
     }
+
+
 
 
 
